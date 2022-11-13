@@ -19,6 +19,7 @@ public class Calculatrice implements ActionListener {
         frame = new JFrame("Calculatrice");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(420,550);
+        frame.getContentPane().setBackground(new Color(59, 56, 56, 174));
         frame.setLayout(null);
 
 
@@ -27,6 +28,9 @@ public class Calculatrice implements ActionListener {
         textfield.setFont(new Font("SERIF", Font.BOLD,55));
         textfield.setBackground(new Color(52, 52, 54));
         textfield.setEditable(false);
+        textfield.setHorizontalAlignment(JTextField.RIGHT);
+        textfield.setForeground(new Color (255,255,255));
+        //textfield.setText(String.valueOf(result));
 
         add = new JButton("+");
         times = new JButton("x");
@@ -67,6 +71,7 @@ public class Calculatrice implements ActionListener {
 
         panel = new JPanel();
         panel.setBounds(50,150,300,300);
+        panel.setBackground(new Color (0, 0, 0, 0));
         panel.setLayout(new GridLayout(4,4,10,10));
 
         panel.add(NUMbuttons[1]);
@@ -101,5 +106,80 @@ public class Calculatrice implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        for (int i = 0; i < NUMbuttons.length; i++){
+            if(e.getSource() == NUMbuttons[i]){
+                textfield.setText(textfield.getText().concat(String.valueOf(i)));
+            }
+        }
+
+        if (e.getSource() == clear){
+            textfield.setText(" ");
+        }
+
+        if (e.getSource() == neg){
+            double preValue = Double.parseDouble(textfield.getText());
+            preValue *= -1;
+            textfield.setText(String.valueOf(preValue));
+        }
+
+        if (e.getSource() == decimal){
+            if (!textfield.getText().contains(".")) {
+                textfield.setText(textfield.getText().concat("."));
+            }
+        }
+
+        if (e.getSource() == del){
+            String previous = String.valueOf(textfield.getText());
+            textfield.setText(" ");
+            for (int i = 0; i < previous.length() -1; i++){
+                textfield.setText(textfield.getText().concat(String.valueOf(previous.charAt(i))));
+            }
+        }
+
+        if (e.getSource() == add){
+            num1 = Double.parseDouble(textfield.getText());
+            operator = '+';
+            textfield.setText(" ");
+        }
+
+        if (e.getSource() == minus){
+            num1 = Double.parseDouble(textfield.getText());
+            operator = '-';
+            textfield.setText(" ");
+        }
+
+        if (e.getSource() == times){
+            num1 = Double.parseDouble(textfield.getText());
+            operator = '*';
+            textfield.setText(" ");
+        }
+
+        if (e.getSource() == div){
+            num1 = Double.parseDouble(textfield.getText());
+            operator = '/';
+            textfield.setText(" ");
+        }
+
+        if(e.getSource() == equal){
+            num2 = Double.parseDouble(textfield.getText());
+
+            switch (operator){
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    result = num1/num2;
+                    break;
+            }
+            num1 = result;
+            operator = ' ';
+            textfield.setText(String.valueOf(result));
+        }
     }
 }
