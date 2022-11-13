@@ -2,12 +2,8 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
-/*
 
-
- */
 public class Calculator implements ActionListener{
-
     JFrame frame = new JFrame();
     JPanel title_panel = new JPanel();
     JPanel result_Panel = new JPanel();
@@ -16,6 +12,8 @@ public class Calculator implements ActionListener{
     JLabel text = new JLabel();
     JButton[] numbers = new JButton[10];
     JButton[] operations = new JButton[5];
+
+    private int result;
 
     public Calculator(){
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,6 +34,7 @@ public class Calculator implements ActionListener{
         title_panel.setBounds(0,0,350,450);
 
         result_Panel.setLayout(new BorderLayout());
+
         number_panel.setLayout(new GridLayout(4,3));
         operation_panel.setLayout(new GridLayout(5,1));
 
@@ -83,29 +82,36 @@ public class Calculator implements ActionListener{
         frame.add(number_panel);
         frame.add(operation_panel, BorderLayout.EAST);
 
-
+        start();
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
+       
 
+    }
+
+    public void start(){
 
     }
 
     public int add(int a, int b){
-        return 0;
+        this.result = a + b;
+        return result;
     }
     public int multiply(int a, int b){
-        return 0;
+        result = a * b;
+        return result;
     }
 
     public int divide (int a, int b){
-        return 0;
+        result = a /b ;
+        return result;
     }
 
     public int subtract(int a, int b){
-        return 0;
+        result = a - b;
+        return result;
     }
 
 }
